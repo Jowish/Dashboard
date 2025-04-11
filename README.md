@@ -12,42 +12,42 @@ Habit tracker dashboard that you can add habits to do daily
 
 ## Todo
 
-### Navbar [ ]
+### Navbar
 
 -   [ ] Dashboard page
 -   [ ] Manage habits page
 -   [ ] Logout modal
 
-### Dashboard Page [ ]
+### Dashboard Page
 
 -   [ ] Habits table separated by days
 -   [ ] Performance weekly and daily
 -   [ ] Calendar
 
-### Manage Habits Page [ ]
+### Manage Habits Page
 
 -   [ ] List of habits with weekly days buttons to set
 -   [ ] Add task button
 -   [ ] Edit task button
 -   [ ] Delete task button
 
-### Logout Modal [ ]
+### Logout Modal
 
 -   [ ] Are you shure message
 -   [ ] Lougout button
 -   [ ] Redirect to login page
 
-### Login Page [ ]
+### Login Page
 
 -   [ ] Form with username and password
 -   [ ] Github and Google login button
 
-### Register Page [ ]
+### Register Page
 
 -   [ ] Form with username, email and password
 -   [ ] Login redirect
 
-### Database [ ]
+### Database
 
 -   [ ] Sqlite schema
 -   [ ] Users and tasks table
