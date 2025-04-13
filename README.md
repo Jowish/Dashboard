@@ -33,7 +33,7 @@ Habit tracker dashboard that you can add habits to do daily
 
 ### Logout Modal
 
--   [ ] Are you shure message
+-   [ ] Are you sure message
 -   [ ] Lougout button
 -   [ ] Redirect to login page
 
