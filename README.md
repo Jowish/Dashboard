@@ -14,8 +14,8 @@ Habit tracker dashboard that you can add habits to do daily
 
 ### Navbar
 
--   [ ] Dashboard page
--   [ ] Manage habits page
+-   [x] Dashboard page
+-   [x] Manage habits page
 -   [ ] Logout modal
 
 ### Dashboard Page
@@ -34,7 +34,7 @@ Habit tracker dashboard that you can add habits to do daily
 ### Logout Modal
 
 -   [ ] Are you sure message
--   [ ] Lougout button
+-   [ ] Logout button
 -   [ ] Redirect to login page
 
 ### Login Page
