@@ -49,5 +49,5 @@ Habit tracker dashboard that you can add habits to do daily
 
 ### Database
 
--   [ ] Sqlite schema
+-   [ ] Sqlite database
 -   [ ] Users and tasks table
