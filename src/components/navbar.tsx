@@ -13,11 +13,11 @@ export default function Navbar() {
             <hr className="border w-full border-[#505050] my-4" />
             <Link
                 className={
-                    path === "/"
+                    path === "/dashboard"
                         ? "bg-[#3b4f5e] w-full p-3 flex items-center"
                         : "text-white w-full p-3 flex items-center"
                 }
-                href="/"
+                href="/dashboard"
             >
                 <div className="px-5">
                     <Image
@@ -31,11 +31,11 @@ export default function Navbar() {
             </Link>
             <Link
                 className={
-                    path === "/habits"
+                    path === "/manage"
                         ? "bg-[#3b4f5e] w-full p-3 flex items-center"
                         : "text-white w-full p-3 flex items-center"
                 }
-                href="/habits"
+                href="/manage"
             >
                 <div className="px-5">
                     <Image
