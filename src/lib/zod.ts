@@ -1,6 +1,6 @@
 import { object, string } from "zod";
 
-export const loginInSchema = object({
+export const loginSchema = object({
     username: string({ required_error: "Username is required" }).min(
         1,
         "Username is required"
