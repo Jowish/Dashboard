@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import { integer, text, sqliteTable } from "drizzle-orm/sqlite-core";
 
 export const users = sqliteTable("users", {
@@ -12,5 +13,16 @@ export const habits = sqliteTable("habits", {
     title: text().notNull(),
     description: text().notNull(),
     complete: integer({ mode: "boolean" }).default(false),
-    ownerId: integer().references(() => users.id),
+    ownerId: integer("owner_id"),
 });
+
+export const usersRelations = relations(users, ({ many }) => ({
+    habits: many(habits),
+}));
+
+export const habitsRelations = relations(habits, ({ one }) => ({
+    owner: one(users, {
+        fields: [habits.ownerId],
+        references: [users.id],
+    }),
+}));
