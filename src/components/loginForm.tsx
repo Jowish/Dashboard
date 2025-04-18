@@ -5,7 +5,7 @@ export default function LoginForm() {
                 className="bg-white text-black p-2 rounded-lg w-56"
                 type="text"
                 name="username"
-                placeholder="User"
+                placeholder="Username"
             />
             <input
                 className="bg-white text-black p-2 rounded-lg w-56"
