@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 export default async function Signup() {
     const session = await auth();
 
-    // if (session?.user) redirect("/dashboard");
+    if (session?.user) redirect("/dashboard");
 
     return (
         <div className="flex flex-col w-screen items-center p-12 space-y-4">
