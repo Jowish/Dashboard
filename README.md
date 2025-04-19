@@ -39,7 +39,7 @@ Habit tracker dashboard that you can add habits to do daily
 
 ### Login Page
 
--   [ ] Form with username and password
+-   [x] Form with username and password
 -   [ ] Github and Google login button
 
 ### Register Page
