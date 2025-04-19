@@ -41,11 +41,13 @@ Habit tracker dashboard that you can add habits to do daily
 
 -   [x] Form with username and password
 -   [ ] Github and Google login button
+-   [ ] Style
 
 ### Register Page
 
--   [ ] Form with username, email and password
--   [ ] Login redirect
+-   [x] Form with username, email and password
+-   [x] Login redirect
+-   [ ] Style
 
 ### Database
 
