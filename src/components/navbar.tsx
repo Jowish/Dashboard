@@ -3,50 +3,80 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import {
+    Sidebar,
+    SidebarContent,
+    SidebarFooter,
+    SidebarGroup,
+    SidebarGroupContent,
+    SidebarHeader,
+    SidebarMenu,
+    SidebarMenuButton,
+    SidebarMenuItem,
+} from "./ui/sidebar";
+import { useSession } from "next-auth/react";
+import LogoutDialog from "./logoutDialog";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
     const path = usePathname();
+    const { data: session } = useSession();
+
+    const [bool, setBool] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (session) setBool(true);
+        else setBool(false);
+    }, [session]);
 
     return (
-        <nav className=" flex flex-col py-2 w-56 items-center bg-[#414141]">
-            <p className="font-bold p-2">Habit Tracker</p>
-            <hr className="border w-full border-[#505050] my-4" />
-            <Link
-                className={
-                    path === "/dashboard"
-                        ? "bg-[#3b4f5e] w-full p-3 flex items-center"
-                        : "text-white w-full p-3 flex items-center"
-                }
-                href="/dashboard"
-            >
-                <div className="px-5">
-                    <Image
-                        src="dashboard.svg"
-                        alt="Dashboard"
-                        width="25"
-                        height="25"
-                    />
-                </div>
-                Dashboard
-            </Link>
-            <Link
-                className={
-                    path === "/manage"
-                        ? "bg-[#3b4f5e] w-full p-3 flex items-center"
-                        : "text-white w-full p-3 flex items-center"
-                }
-                href="/manage"
-            >
-                <div className="px-5">
-                    <Image
-                        src="plusicon.svg"
-                        alt="Plus"
-                        width="25"
-                        height="25"
-                    />
-                </div>
-                Manage Habits
-            </Link>
-        </nav>
+        <Sidebar>
+            <SidebarHeader>
+                <span className="text-2xl font-bold">Habit Tracker</span>
+            </SidebarHeader>
+            <SidebarContent>
+                <SidebarGroup>
+                    <SidebarGroupContent>
+                        <SidebarMenu>
+                            <SidebarMenuItem>
+                                {path === "/dashboard" ? (
+                                    <SidebarMenuButton asChild isActive>
+                                        <Link href="/dashboard">Dashboard</Link>
+                                    </SidebarMenuButton>
+                                ) : (
+                                    <SidebarMenuButton asChild>
+                                        <Link href="/dashboard">Dashboard</Link>
+                                    </SidebarMenuButton>
+                                )}
+                            </SidebarMenuItem>
+                            <SidebarMenuItem>
+                                {path === "/manage" ? (
+                                    <SidebarMenuButton asChild isActive>
+                                        <Link href="/manage">
+                                            Manage Habits
+                                        </Link>
+                                    </SidebarMenuButton>
+                                ) : (
+                                    <SidebarMenuButton asChild>
+                                        <Link href="/manage">
+                                            Manage Habits
+                                        </Link>
+                                    </SidebarMenuButton>
+                                )}
+                            </SidebarMenuItem>
+                        </SidebarMenu>
+                    </SidebarGroupContent>
+                </SidebarGroup>
+            </SidebarContent>
+            <SidebarFooter>
+                <SidebarMenu>
+                    {bool && (
+                        <SidebarMenuItem>
+                            <LogoutDialog />
+                        </SidebarMenuItem>
+                    )}
+                </SidebarMenu>
+            </SidebarFooter>
+        </Sidebar>
     );
 }
