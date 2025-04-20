@@ -1,6 +1,6 @@
 "use client";
 
-import { register } from "@/app/signup/actions";
+import { register } from "@/lib/actions";
 import { useActionState } from "react";
 
 export default function SignupForm() {
