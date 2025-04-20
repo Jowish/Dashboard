@@ -2,7 +2,6 @@
 
 import { signIn } from "@/lib/auth";
 import { loginSchema } from "@/lib/zod";
-import React from "react";
 
 export async function login(state: any, formData: FormData) {
     const validated = loginSchema.safeParse({
