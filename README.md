@@ -33,9 +33,9 @@ Habit tracker dashboard that you can add habits to do daily
 
 ### Logout Modal
 
--   [ ] Are you sure message
--   [ ] Logout button
--   [ ] Redirect to login page
+-   [x] Are you sure message
+-   [x] Logout button
+-   [x] Redirect to login page
 
 ### Login Page
 
