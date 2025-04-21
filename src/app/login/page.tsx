@@ -1,4 +1,5 @@
 import LoginForm from "@/components/loginForm";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
@@ -8,9 +9,15 @@ export default async function LoginPage() {
     if (session?.user) redirect("/dashboard");
 
     return (
-        <div className="flex flex-col w-screen items-center p-12 space-y-4">
-            <h1 className="text-2xl">Please Login</h1>
-            <LoginForm />
+        <div className="flex flex-col w-screen items-center mt-64 space-y-4">
+            <Card>
+                <CardHeader>
+                    <CardTitle>Please Login</CardTitle>
+                </CardHeader>
+                <CardContent>
+                    <LoginForm />
+                </CardContent>
+            </Card>
         </div>
     );
 }
