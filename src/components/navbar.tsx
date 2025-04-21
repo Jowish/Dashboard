@@ -40,8 +40,14 @@ export default function Navbar() {
                         <SidebarMenu>
                             <SidebarMenuItem>
                                 {path === "/dashboard" ? (
-                                    <SidebarMenuButton asChild isActive>
-                                        <Link href="/dashboard">Dashboard</Link>
+                                    <SidebarMenuButton
+                                        asChild
+                                        isActive
+                                        className="p-4"
+                                    >
+                                        <Link href="/dashboard" className="p-4">
+                                            Dashboard
+                                        </Link>
                                     </SidebarMenuButton>
                                 ) : (
                                     <SidebarMenuButton asChild>
@@ -51,8 +57,12 @@ export default function Navbar() {
                             </SidebarMenuItem>
                             <SidebarMenuItem>
                                 {path === "/manage" ? (
-                                    <SidebarMenuButton asChild isActive>
-                                        <Link href="/manage">
+                                    <SidebarMenuButton
+                                        asChild
+                                        isActive
+                                        className="p-4"
+                                    >
+                                        <Link href="/manage" className="p-4">
                                             Manage Habits
                                         </Link>
                                     </SidebarMenuButton>
