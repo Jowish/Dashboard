@@ -19,6 +19,7 @@ interface UserRegister {
 export async function login(data: User) {
     console.log(data);
     await signIn("credentials", data);
+    redirect("/dashboard");
 }
 
 export async function register(data: UserRegister) {
@@ -32,10 +33,13 @@ export async function register(data: UserRegister) {
         username: data.username,
         password: data.password,
     };
-    await signIn("credentials", user);
+    await signIn("credentials", data);
+    redirect("/dashboard");
 }
 
 export async function logout() {
-    await signOut();
-    redirect("/login");
+    await signOut({
+        redirect: true,
+        redirectTo: "/login",
+    });
 }

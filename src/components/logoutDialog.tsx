@@ -13,14 +13,14 @@ import {
 } from "./ui/alert-dialog";
 import { useState } from "react";
 import { Button } from "./ui/button";
-import { redirect } from "next/navigation";
+import { logout } from "@/lib/actions";
 
 export default function LogoutDialog() {
     const [open, setOpen] = useState(false);
 
-    function handleClick() {
+    async function handleClick() {
         setOpen(false);
-        redirect("/api/logout");
+        await logout();
     }
 
     return (
