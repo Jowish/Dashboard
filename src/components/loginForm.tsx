@@ -1,7 +1,7 @@
 "use client";
 
 import { login } from "@/lib/actions";
-import { useActionState } from "react";
+import React, { FormEventHandler, useActionState } from "react";
 import { Form, FormControl, FormField, FormItem } from "./ui/form";
 import { Input } from "./ui/input";
 import { useForm } from "react-hook-form";
@@ -10,8 +10,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema } from "@/lib/zod";
 import { Button } from "./ui/button";
 
+interface FormElements extends HTMLFormControlsCollection {
+    username: HTMLInputElement;
+    password: HTMLInputElement;
+}
+
+interface UserFormElemet extends HTMLFormElement {
+    readonly elements: FormElements;
+}
+
 export default function LoginForm() {
-    const [state, action] = useActionState(login, undefined);
     const form = useForm<z.infer<typeof loginSchema>>({
         resolver: zodResolver(loginSchema),
         defaultValues: {
@@ -20,16 +28,24 @@ export default function LoginForm() {
         },
     });
 
+    async function onSubmit(data: z.infer<typeof loginSchema>) {
+        await login(data);
+    }
+
     return (
         <Form {...form}>
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
                 <FormField
                     control={form.control}
                     name="username"
                     render={({ field }) => (
                         <FormItem>
                             <FormControl>
-                                <Input placeholder="User" className="w-64" />
+                                <Input
+                                    placeholder="User"
+                                    className="w-64"
+                                    {...field}
+                                />
                             </FormControl>
                         </FormItem>
                     )}
@@ -44,6 +60,7 @@ export default function LoginForm() {
                                     type="password"
                                     placeholder="Password"
                                     className="w-64"
+                                    {...field}
                                 />
                             </FormControl>
                         </FormItem>
