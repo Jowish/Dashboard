@@ -1,43 +1,84 @@
 "use client";
 
+import { Form, FormControl, FormField, FormItem, FormLabel } from "./ui/form";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { registerSchema } from "@/lib/zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
 import { register } from "@/lib/actions";
-import { useActionState } from "react";
 
 export default function SignupForm() {
-    const [state, action] = useActionState(register, undefined);
+    const form = useForm<z.infer<typeof registerSchema>>({
+        resolver: zodResolver(registerSchema),
+        defaultValues: {
+            username: "",
+            email: "",
+            password: "",
+        },
+    });
+
+    async function onSubmit(data: z.infer<typeof registerSchema>) {
+        await register(data);
+    }
 
     return (
-        <form className="flex flex-col space-y-4" action={action}>
-            <input
-                className="bg-white text-black p-2 rounded-lg w-56"
-                type="text"
-                name="username"
-                placeholder="User"
-            />
-            {state?.errors?.username && (
-                <p className="text-red-500">{state.errors.username}</p>
-            )}
-            <input
-                className="bg-white text-black p-2 rounded-lg w-56"
-                type="text"
-                name="email"
-                placeholder="Email"
-            />
-            {state?.errors?.email && (
-                <p className="text-red-500">{state.errors.email}</p>
-            )}
-            <input
-                className="bg-white text-black p-2 rounded-lg w-56"
-                type="password"
-                name="password"
-                placeholder="Password"
-            />
-            {state?.errors?.password && (
-                <p className="text-red-500">{state.errors.password}</p>
-            )}
-            <button className="bg-blue-700 text-white py-2 px-4 rounded-lg w-fit">
-                Signup
-            </button>
-        </form>
+        <Form {...form}>
+            <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+                <FormField
+                    control={form.control}
+                    name="username"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>User</FormLabel>
+                            <FormControl>
+                                <Input
+                                    placeholder="Username"
+                                    className="w-96"
+                                    {...field}
+                                />
+                            </FormControl>
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Email</FormLabel>
+                            <FormControl>
+                                <Input
+                                    placeholder="email@example.com"
+                                    className="w-96"
+                                    {...field}
+                                />
+                            </FormControl>
+                        </FormItem>
+                    )}
+                />
+                <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>Password</FormLabel>
+                            <FormControl>
+                                <Input
+                                    type="password"
+                                    placeholder="*******"
+                                    className="w-96"
+                                    {...field}
+                                />
+                            </FormControl>
+                        </FormItem>
+                    )}
+                />
+                <Button type="submit" className="w-full">
+                    Submit
+                </Button>
+            </form>
+        </Form>
     );
 }
