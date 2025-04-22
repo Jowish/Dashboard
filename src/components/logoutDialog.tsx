@@ -12,6 +12,7 @@ import {
 } from "./ui/alert-dialog";
 import { redirect } from "next/navigation";
 import { useState } from "react";
+import { Button } from "./ui/button";
 
 export default function LogoutDialog() {
     const [open, setOpen] = useState(false);
@@ -23,7 +24,9 @@ export default function LogoutDialog() {
 
     return (
         <AlertDialog open={open} onOpenChange={setOpen}>
-            <AlertDialogTrigger>Logout</AlertDialogTrigger>
+            <AlertDialogTrigger className="w-full">
+                <Button className="w-full">Logout</Button>
+            </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <AlertDialogTitle>Are you sure?</AlertDialogTitle>
