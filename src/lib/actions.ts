@@ -5,20 +5,16 @@ import { signIn } from "./auth";
 import { loginSchema, registerSchema } from "./zod";
 import { users } from "@/db/schema";
 import { redirect } from "next/navigation";
+import React from "react";
 
-export async function login(state: any, formData: FormData) {
-    const validated = loginSchema.safeParse({
-        username: formData.get("username"),
-        password: formData.get("password"),
-    });
+interface User {
+    username: string;
+    password: string;
+}
 
-    if (!validated.success) {
-        return {
-            errors: validated.error.flatten().fieldErrors,
-        };
-    }
-
-    await signIn("credentials", validated.data);
+export async function login(data: User) {
+    console.log(data);
+    await signIn("credentials", data);
 }
 
 export async function register(state: any, formData: FormData) {
