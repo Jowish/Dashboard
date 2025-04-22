@@ -1,4 +1,5 @@
-import { signOut } from "@/lib/auth";
+"use client";
+
 import {
     AlertDialog,
     AlertDialogAction,
@@ -10,9 +11,9 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "./ui/alert-dialog";
-import { redirect } from "next/navigation";
 import { useState } from "react";
 import { Button } from "./ui/button";
+import { redirect } from "next/navigation";
 
 export default function LogoutDialog() {
     const [open, setOpen] = useState(false);
@@ -24,19 +25,19 @@ export default function LogoutDialog() {
 
     return (
         <AlertDialog open={open} onOpenChange={setOpen}>
-            <AlertDialogTrigger className="w-full">
+            <AlertDialogTrigger asChild className="w-full">
                 <Button className="w-full">Logout</Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
                     <AlertDialogTitle>Are you sure?</AlertDialogTitle>
                     <AlertDialogDescription>
-                        You are about to Logout and return to the login page.
+                        You are about to logout and return to the login page.
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel>Cancel</AlertDialogCancel>
-                    <AlertDialogAction type="submit" onClick={handleClick}>
+                    <AlertDialogAction onClick={handleClick}>
                         Continue
                     </AlertDialogAction>
                 </AlertDialogFooter>
