@@ -1,14 +1,18 @@
 "use server";
 
 import { db } from "@/db";
-import { signIn } from "./auth";
-import { loginSchema, registerSchema } from "./zod";
+import { signIn, signOut } from "./auth";
 import { users } from "@/db/schema";
 import { redirect } from "next/navigation";
-import React from "react";
 
 interface User {
     username: string;
+    password: string;
+}
+
+interface UserRegister {
+    username: string;
+    email: string;
     password: string;
 }
 
@@ -17,24 +21,16 @@ export async function login(data: User) {
     await signIn("credentials", data);
 }
 
-export async function register(state: any, formData: FormData) {
-    const validated = registerSchema.safeParse({
-        username: formData.get("username"),
-        email: formData.get("email"),
-        password: formData.get("password"),
-    });
-
-    if (!validated.success) {
-        return {
-            errors: validated.error.flatten().fieldErrors,
-        };
-    }
-
+export async function register(data: UserRegister) {
     try {
-        await db.insert(users).values(validated.data);
+        await db.insert(users).values(data);
+        redirect("/dashboard");
     } catch (error) {
         console.log(error);
     }
+}
 
-    redirect("/");
+export async function logout() {
+    await signOut();
+    redirect("/login");
 }
