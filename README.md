@@ -16,7 +16,7 @@ Habit tracker dashboard that you can add habits to do daily
 
 -   [x] Dashboard page
 -   [x] Manage habits page
--   [ ] Logout modal
+-   [x] Logout modal
 
 ### Dashboard Page
 
@@ -41,13 +41,13 @@ Habit tracker dashboard that you can add habits to do daily
 
 -   [x] Form with username and password
 -   [ ] Github and Google login button
--   [ ] Style
+-   [x] Style
 
 ### Register Page
 
 -   [x] Form with username, email and password
 -   [x] Login redirect
--   [ ] Style
+-   [x] Style
 
 ### Database
 
