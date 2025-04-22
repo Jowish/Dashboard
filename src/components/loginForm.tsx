@@ -1,7 +1,7 @@
 "use client";
 
 import { login } from "@/lib/actions";
-import { Form, FormControl, FormField, FormItem } from "./ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "./ui/form";
 import { Input } from "./ui/input";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -30,10 +30,11 @@ export default function LoginForm() {
                     name="username"
                     render={({ field }) => (
                         <FormItem>
+                            <FormLabel>User</FormLabel>
                             <FormControl>
                                 <Input
-                                    placeholder="User"
-                                    className="w-64"
+                                    placeholder="Username"
+                                    className="w-96"
                                     {...field}
                                 />
                             </FormControl>
@@ -45,11 +46,12 @@ export default function LoginForm() {
                     name="password"
                     render={({ field }) => (
                         <FormItem>
+                            <FormLabel>Password</FormLabel>
                             <FormControl>
                                 <Input
                                     type="password"
-                                    placeholder="Password"
-                                    className="w-64"
+                                    placeholder="********"
+                                    className="w-96"
                                     {...field}
                                 />
                             </FormControl>
@@ -57,7 +59,9 @@ export default function LoginForm() {
                     )}
                 />
 
-                <Button type="submit">Submit</Button>
+                <Button type="submit" className="w-full">
+                    Login
+                </Button>
             </form>
         </Form>
     );
