@@ -24,10 +24,15 @@ export async function login(data: User) {
 export async function register(data: UserRegister) {
     try {
         await db.insert(users).values(data);
-        redirect("/dashboard");
     } catch (error) {
         console.log(error);
     }
+
+    const user = {
+        username: data.username,
+        password: data.password,
+    };
+    await signIn("credentials", user);
 }
 
 export async function logout() {
