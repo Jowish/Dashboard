@@ -31,7 +31,9 @@ export default async function Signup() {
                 <CardFooter>
                     <p className="w-full text-center">
                         Already have an account?{" "}
-                        <Link href="/login">Login</Link>
+                        <Link href="/login" className="underline">
+                            Login
+                        </Link>
                     </p>
                 </CardFooter>
             </Card>
