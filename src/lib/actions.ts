@@ -2,8 +2,9 @@
 
 import { db } from "@/db";
 import { signIn, signOut } from "./auth";
-import { users } from "@/db/schema";
+import { habits, users } from "@/db/schema";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 interface User {
     username: string;
@@ -42,4 +43,19 @@ export async function logout() {
         redirect: true,
         redirectTo: "/login",
     });
+}
+
+export async function createHabit(data: any, userId: string) {
+    const id = Number(userId);
+    const habit = {
+        ...data,
+        ownerId: id,
+    };
+    try {
+        await db.insert(habits).values(habit);
+    } catch (error) {
+        console.log(error);
+    }
+    revalidatePath("/manage");
+    revalidatePath("/dashboard");
 }
