@@ -28,12 +28,22 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
                 if (!data || data.length === 0)
                     throw new Error("Invalid credentials");
                 user = data[0];
+                const userId = user.id.toString();
 
                 return {
                     id: user.id.toString(),
                     name: user.username,
+                    email: user.email,
+                    image: null,
+                    sub: userId,
                 };
             },
         }),
     ],
+    callbacks: {
+        session: async ({ session, token }) => {
+            session.user.id = token.sub!;
+            return session;
+        },
+    },
 });
