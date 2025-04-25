@@ -62,7 +62,6 @@ export async function createHabit(data: Habit, userId: string) {
         ownerId: id,
     };
 
-    console.log(habit);
     try {
         await db.insert(habits).values(habit);
     } catch (error) {
