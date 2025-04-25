@@ -13,6 +13,7 @@ export const habits = sqliteTable("habits", {
     title: text().notNull(),
     description: text().notNull(),
     complete: integer({ mode: "boolean" }).default(false),
+    date: integer({ mode: "boolean" }).$type<boolean[]>().notNull(),
     ownerId: integer("owner_id"),
 });
 
