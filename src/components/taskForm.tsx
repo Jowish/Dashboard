@@ -7,10 +7,11 @@ import { taskSchema } from "@/lib/zod";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
+import { createHabit } from "@/lib/actions";
 
-const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-export default function TaskForm() {
+export default function TaskForm({ userId }: { userId: string }) {
     const form = useForm<z.infer<typeof taskSchema>>({
         defaultValues: {
             title: "",
@@ -20,12 +21,18 @@ export default function TaskForm() {
         },
     });
 
+    async function onSubmit(data: z.infer<typeof taskSchema>) {
+        if (!userId || userId === undefined) {
+            console.error("User ID is undefined");
+            return;
+        }
+
+        await createHabit(data, userId);
+    }
+
     return (
         <Form {...form}>
-            <form
-                className="space-y-4"
-                onSubmit={form.handleSubmit((data) => console.log(data))}
-            >
+            <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
                 <FormField
                     control={form.control}
                     name="title"
