@@ -17,6 +17,13 @@ interface UserRegister {
     password: string;
 }
 
+interface Habit {
+    title: string;
+    description: string;
+    hour: string;
+    days: boolean[];
+}
+
 export async function login(data: User) {
     console.log(data);
     await signIn("credentials", data);
@@ -45,12 +52,17 @@ export async function logout() {
     });
 }
 
-export async function createHabit(data: any, userId: string) {
+export async function createHabit(data: Habit, userId: string) {
     const id = Number(userId);
     const habit = {
-        ...data,
+        title: data.title,
+        description: data.description,
+        hour: data.hour,
+        date: data.days,
         ownerId: id,
     };
+
+    console.log(habit);
     try {
         await db.insert(habits).values(habit);
     } catch (error) {
