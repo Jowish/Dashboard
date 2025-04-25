@@ -12,8 +12,9 @@ export const habits = sqliteTable("habits", {
     id: integer().primaryKey({ autoIncrement: true }),
     title: text().notNull(),
     description: text().notNull(),
+    hour: text().notNull(),
     complete: integer({ mode: "boolean" }).default(false),
-    date: integer({ mode: "boolean" }).$type<boolean[]>().notNull(),
+    date: text({ mode: "json" }).$type<boolean[]>().notNull(),
     ownerId: integer("owner_id"),
 });
 
