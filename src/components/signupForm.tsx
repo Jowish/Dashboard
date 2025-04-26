@@ -25,17 +25,17 @@ export default function SignupForm() {
 
     return (
         <Form {...form}>
-            <form className="space-y-4" onSubmit={form.handleSubmit(onSubmit)}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
                 <FormField
                     control={form.control}
                     name="username"
                     render={({ field }) => (
                         <FormItem>
-                            <FormLabel>User</FormLabel>
+                            <FormLabel>Username</FormLabel>
                             <FormControl>
                                 <Input
                                     placeholder="Username"
-                                    className="w-96"
+                                    className="w-full"
                                     {...field}
                                 />
                             </FormControl>
@@ -50,8 +50,9 @@ export default function SignupForm() {
                             <FormLabel>Email</FormLabel>
                             <FormControl>
                                 <Input
-                                    placeholder="email@example.com"
-                                    className="w-96"
+                                    type="email"
+                                    placeholder="Email"
+                                    className="w-full"
                                     {...field}
                                 />
                             </FormControl>
@@ -67,16 +68,17 @@ export default function SignupForm() {
                             <FormControl>
                                 <Input
                                     type="password"
-                                    placeholder="*******"
-                                    className="w-96"
+                                    placeholder="********"
+                                    className="w-full"
                                     {...field}
                                 />
                             </FormControl>
                         </FormItem>
                     )}
                 />
+
                 <Button type="submit" className="w-full">
-                    Submit
+                    Sign up
                 </Button>
             </form>
         </Form>
