@@ -7,11 +7,13 @@ export default function RootLayout({
     children,
 }: Readonly<{ children: React.ReactNode }>) {
     return (
-        <div>
+        <div className="flex h-screen">
             <SessionProvider>
                 <SidebarProvider>
                     <Navbar />
-                    {children}
+                    <main className="flex-1 flex justify-center">
+                        {children}
+                    </main>
                 </SidebarProvider>
             </SessionProvider>
         </div>

@@ -42,7 +42,7 @@ export default function TaskForm({ userId }: { userId: string }) {
                             <FormControl>
                                 <Input
                                     placeholder="e.g. Walk with the dog"
-                                    className="w-96"
+                                    className="w-full"
                                     {...field}
                                 />
                             </FormControl>
@@ -58,7 +58,7 @@ export default function TaskForm({ userId }: { userId: string }) {
                             <FormControl>
                                 <Textarea
                                     placeholder="e.g. 30 min of walk in the park"
-                                    className="w-96 h-16"
+                                    className="w-full h-16"
                                     {...field}
                                 />
                             </FormControl>
@@ -74,7 +74,7 @@ export default function TaskForm({ userId }: { userId: string }) {
                             <FormControl>
                                 <Input
                                     placeholder="e.g. 10:00"
-                                    className="w-96"
+                                    className="w-full"
                                     {...field}
                                 />
                             </FormControl>

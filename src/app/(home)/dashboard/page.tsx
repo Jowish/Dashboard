@@ -7,8 +7,10 @@ export default async function Dashboard() {
     if (!session) redirect("/login");
 
     return (
-        <div>
-            <h1>Dashboard</h1>
+        <div className="w-full max-w-3xl p-6">
+            <div>
+                <h1>Dashboard</h1>
+            </div>
         </div>
     );
 }

@@ -17,26 +17,28 @@ export default async function Signup() {
     if (session?.user) redirect("/dashboard");
 
     return (
-        <div className="flex flex-col w-screen items-center mt-64 space-y-4">
-            <Card>
-                <CardHeader>
-                    <CardTitle>Sign up</CardTitle>
-                    <CardDescription>
-                        Register and login with and user, email and password
-                    </CardDescription>
-                </CardHeader>
-                <CardContent>
-                    <SignupForm />
-                </CardContent>
-                <CardFooter>
-                    <p className="w-full text-center">
-                        Already have an account?{" "}
-                        <Link href="/login" className="underline">
-                            Login
-                        </Link>
-                    </p>
-                </CardFooter>
-            </Card>
+        <div className="flex-1 flex justify-center items-center px-4">
+            <div className="w-full max-w-lg">
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Sign up</CardTitle>
+                        <CardDescription>
+                            Register and login with and user, email and password
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <SignupForm />
+                    </CardContent>
+                    <CardFooter>
+                        <p className="w-full text-center">
+                            Already have an account?{" "}
+                            <Link href="/login" className="underline">
+                                Login
+                            </Link>
+                        </p>
+                    </CardFooter>
+                </Card>
+            </div>
         </div>
     );
 }
