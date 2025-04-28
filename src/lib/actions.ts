@@ -1,10 +1,11 @@
 "use server";
 
-import { db } from "@/db";
-import { signIn, signOut } from "./auth";
-import { habits, users } from "@/db/schema";
-import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache";
+import {db} from "@/db";
+import {signIn, signOut} from "./auth";
+import {habits, users} from "@/db/schema";
+import {redirect} from "next/navigation";
+import {revalidatePath} from "next/cache";
+import {eq} from "drizzle-orm/sql/expressions/conditions";
 
 interface User {
     username: string;
@@ -24,16 +25,6 @@ interface Habit {
     days: boolean[];
 }
 
-interface Task {
-    id: number;
-    title: string;
-    description: string;
-    hour: string;
-    complete: boolean | null;
-    date: boolean[];
-    ownerId: number | null;
-}
-
 export async function login(data: User) {
     console.log(data);
     await signIn("credentials", data);
@@ -47,10 +38,6 @@ export async function register(data: UserRegister) {
         console.log(error);
     }
 
-    const user = {
-        username: data.username,
-        password: data.password,
-    };
     await signIn("credentials", data);
     redirect("/dashboard");
 }
@@ -81,15 +68,20 @@ export async function createHabit(data: Habit, userId: string) {
     revalidatePath("/dashboard");
 }
 
-export async function updateTask(data: Task, userId: string) {
-    const id = Number(userId);
-    const habit = {
-        id: data.id,
+export async function updateTask(data: Habit, taskId: number) {
+    const task = {
         title: data.title,
         description: data.description,
         hour: data.hour,
-        complete: data.complete,
-        date: data.date,
-        ownerId: data.ownerId,
-    };
+        date: data.days,
+    }
+
+    try {
+        await db.update(habits).set(task).where(eq(habits.id, taskId))
+    } catch (error) {
+        console.log(error);
+    }
+
+    revalidatePath("/manage");
+    revalidatePath("/dashboard");
 }

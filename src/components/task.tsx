@@ -53,7 +53,7 @@ export default function Task({ data }: { data: Task }) {
                 </CardContent>
                 {openForm && (
                     <CardFooter>
-                        <TaskForm data={data} />
+                        <TaskForm _data={data} />
                     </CardFooter>
                 )}
             </Card>

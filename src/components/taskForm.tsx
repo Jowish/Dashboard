@@ -7,7 +7,7 @@ import { taskSchema } from "@/lib/zod";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { Textarea } from "./ui/textarea";
-import { createHabit } from "@/lib/actions";
+import {createHabit, updateTask} from "@/lib/actions";
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -23,10 +23,10 @@ interface Task {
 
 export default function TaskForm({
     userId,
-    data,
+    _data,
 }: {
     userId?: string;
-    data?: Task;
+    _data?: Task;
 }) {
     const form = useForm<z.infer<typeof taskSchema>>({
         defaultValues: {
@@ -39,15 +39,15 @@ export default function TaskForm({
 
     const form2 = useForm<z.infer<typeof taskSchema>>({
         defaultValues: {
-            title: data?.title,
-            description: data?.description,
-            hour: data?.hour,
-            days: data?.date,
+            title: _data?.title,
+            description: _data?.description,
+            hour: _data?.hour,
+            days: _data?.date,
         },
     });
 
     async function onSubmit(data: z.infer<typeof taskSchema>) {
-        if (!userId || userId === undefined) {
+        if (!userId) {
             console.error("User ID is undefined");
             return;
         }
@@ -55,9 +55,11 @@ export default function TaskForm({
         await createHabit(data, userId);
     }
 
-    async function onUpdate(data: z.infer<typeof taskSchema>) {}
+    async function onUpdate(data: z.infer<typeof taskSchema>) {
+        await updateTask(data, _data!.id);
+    }
 
-    if (!data) {
+    if (!_data) {
         return (
             <Form {...form}>
                 <form
@@ -143,12 +145,12 @@ export default function TaskForm({
                 </form>
             </Form>
         );
-    } else if (data) {
+    } else if (_data) {
         return (
             <Form {...form2}>
                 <form
                     className="space-y-4"
-                    onSubmit={form.handleSubmit(onSubmit)}
+                    onSubmit={form2.handleSubmit(onUpdate)}
                 >
                     <FormField
                         control={form2.control}
