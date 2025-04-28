@@ -1,10 +1,8 @@
 import Task from "@/components/task";
 import TaskForm from "@/components/taskForm";
-import { Button } from "@/components/ui/button";
 import {
     Card,
     CardContent,
-    CardDescription,
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
@@ -17,7 +15,6 @@ export default async function ManageHabits() {
     const session = await auth();
     if (!session) redirect("/login");
     const userId = session.user?.id as string;
-    const id = Number(userId);
 
     const tasks = await db.select().from(habits);
     console.log(tasks);
@@ -41,7 +38,4 @@ export default async function ManageHabits() {
             </div>
         </div>
     );
-}
-function eq(ownerId: any, userId: string): any {
-    throw new Error("Function not implemented.");
 }
