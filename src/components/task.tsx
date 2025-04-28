@@ -1,11 +1,16 @@
+"use client";
+
+import { useState } from "react";
 import { Button } from "./ui/button";
 import {
     Card,
     CardContent,
     CardDescription,
+    CardFooter,
     CardHeader,
     CardTitle,
 } from "./ui/card";
+import TaskForm from "./taskForm";
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -20,6 +25,8 @@ interface Task {
 }
 
 export default function Task({ data }: { data: Task }) {
+    const [openForm, setOpenForm] = useState(false);
+
     return (
         <div className="grid gap-6">
             <Card key={data.id}>
@@ -27,7 +34,9 @@ export default function Task({ data }: { data: Task }) {
                     <CardTitle>
                         {data.title}{" "}
                         <span className="flex justify-end">
-                            <Button>Configure</Button>
+                            <Button onClick={() => setOpenForm(!openForm)}>
+                                Configure
+                            </Button>
                         </span>
                     </CardTitle>
                     <CardDescription>{data.description}</CardDescription>
@@ -42,6 +51,11 @@ export default function Task({ data }: { data: Task }) {
                     </p>
                     <p>Hour: {data.hour}</p>
                 </CardContent>
+                {openForm && (
+                    <CardFooter>
+                        <TaskForm data={data} />
+                    </CardFooter>
+                )}
             </Card>
         </div>
     );

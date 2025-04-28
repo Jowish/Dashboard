@@ -24,6 +24,16 @@ interface Habit {
     days: boolean[];
 }
 
+interface Task {
+    id: number;
+    title: string;
+    description: string;
+    hour: string;
+    complete: boolean | null;
+    date: boolean[];
+    ownerId: number | null;
+}
+
 export async function login(data: User) {
     console.log(data);
     await signIn("credentials", data);
@@ -69,4 +79,17 @@ export async function createHabit(data: Habit, userId: string) {
     }
     revalidatePath("/manage");
     revalidatePath("/dashboard");
+}
+
+export async function updateTask(data: Task, userId: string) {
+    const id = Number(userId);
+    const habit = {
+        id: data.id,
+        title: data.title,
+        description: data.description,
+        hour: data.hour,
+        complete: data.complete,
+        date: data.date,
+        ownerId: data.ownerId,
+    };
 }
